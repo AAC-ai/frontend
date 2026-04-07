@@ -69,7 +69,7 @@ export const words: Word[] = [
   { id: 'body-eye', label: '눈', categoryId: 'body', emoji: '👁️' },
   { id: 'body-ear', label: '귀', categoryId: 'body', emoji: '👂' },
   { id: 'body-mouth', label: '입', categoryId: 'body', emoji: '👄' },
-  { id: 'body-back', label: '등', categoryId: 'body', emoji: '🔙' },
+  { id: 'body-back', label: '등', categoryId: 'body', emoji: '🫸' },
 
   // 물건
   { id: 'object-phone', label: '핸드폰', categoryId: 'object', emoji: '📱' },
