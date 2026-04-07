@@ -1,0 +1,79 @@
+import { categories } from '@/entities/category';
+import { getWordsByCategory } from '@/entities/word';
+import { useSelectedWordsStore } from '@/features/select-word';
+import { CategoryChip, WordCard } from '@/shared/ui';
+import styles from './WordSelector.module.css';
+
+export function WordSelector() {
+  const { selectedWords, activeCategoryId, toggleWord, setActiveCategory, clearWords } =
+    useSelectedWordsStore();
+
+  const activeCategory = categories.find((c) => c.id === activeCategoryId);
+  const words = getWordsByCategory(activeCategoryId);
+
+  return (
+    <div className={styles.container}>
+      {/* 선택된 단어 표시 바 */}
+      <div className={styles.selectedBar} aria-label="선택된 단어 목록">
+        {selectedWords.length === 0 ? (
+          <span className={styles.selectedLabel}>단어를 선택해 주세요</span>
+        ) : (
+          <>
+            {selectedWords.map((w) => (
+              <span key={`${w.category}-${w.label}`} className={styles.selectedChip}>
+                {w.label}
+              </span>
+            ))}
+            <button
+              type="button"
+              className={styles.clearButton}
+              onClick={clearWords}
+              aria-label="선택 초기화"
+            >
+              초기화
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* 카테고리 탭 */}
+      <nav aria-label="카테고리 선택" className={styles.categoryBar}>
+        {categories.map((category) => (
+          <CategoryChip
+            key={category.id}
+            label={category.label}
+            emoji={category.emoji}
+            isActive={activeCategoryId === category.id}
+            onClick={() => setActiveCategory(category.id)}
+          />
+        ))}
+      </nav>
+
+      {/* 단어 그리드 */}
+      <section aria-label={`${activeCategory?.label ?? ''} 단어 목록`}>
+        <div className={styles.wordGrid} role="list">
+          {words.map((word) => {
+            const isSelected = selectedWords.some(
+              (w) => w.label === word.label && w.category === activeCategory?.label,
+            );
+            return (
+              <div key={word.id} role="listitem">
+                <WordCard
+                  label={word.label}
+                  emoji={word.emoji}
+                  isSelected={isSelected}
+                  onToggle={() =>
+                    toggleWord({
+                      label: word.label,
+                      category: activeCategory?.label ?? '',
+                    })
+                  }
+                />
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}
