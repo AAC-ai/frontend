@@ -10,8 +10,13 @@ export function HomePage() {
         <h1 className={styles.title}>무엇을 말하고 싶나요?</h1>
       </header>
 
-      <SentenceResult />
-      <WordSelector />
+      <div className={styles.wordArea}>
+        <WordSelector />
+      </div>
+
+      <div className={styles.outputArea}>
+        <SentenceResult />
+      </div>
     </main>
   );
 }

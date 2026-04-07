@@ -1,68 +1,53 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  height: 100%;
+  overflow: hidden;
 }
 
-.categoryBar {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
-  scrollbar-width: none;
-}
-
-.categoryBar::-webkit-scrollbar {
-  display: none;
-}
-
-.wordGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 0.625rem;
-}
-
+/* ─── 선택된 단어 바 ─── */
 .selectedBar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  min-height: 44px;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-md);
+  min-height: 60px;
+  padding: 0.75rem 1rem;
   background-color: var(--color-surface);
-  border: 1.5px solid var(--color-border);
+  border-bottom: 1.5px solid var(--color-border);
+  flex-shrink: 0;
 }
 
 .selectedLabel {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  font-size: 1rem;
+  color: var(--color-text-disabled);
 }
 
 .selectedChip {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.625rem;
+  padding: 0.375rem 1rem;
   border-radius: var(--radius-full);
   background-color: #EFF6FF;
-  border: 1.5px solid var(--color-primary);
-  font-size: 0.875rem;
-  font-weight: 500;
+  border: 2px solid var(--color-primary);
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--color-primary);
 }
 
 .clearButton {
   margin-left: auto;
-  min-height: 36px;
-  padding: 0 0.75rem;
-  border: none;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
   background: transparent;
   color: var(--color-text-secondary);
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
   flex-shrink: 0;
+  font-family: inherit;
 }
 
 .clearButton:hover {
@@ -72,4 +57,57 @@
 .clearButton:focus-visible {
   outline: 3px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* ─── 카테고리 탭 ─── */
+.categoryBar {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  background-color: var(--color-surface);
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.categoryBar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── 단어 그리드 ─── */
+.wordGridWrapper {
+  flex: 1;
+  overflow: hidden;
+  padding: 0.75rem;
+  min-height: 0;
+}
+
+/* 모바일: 4열 2행, 높이에 맞춰 카드 자동 확대 */
+.wordGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.625rem;
+  height: 100%;
+}
+
+/* 데스크탑: 카드 최대 높이 제한, auto-fill */
+@media (min-width: 768px) {
+  .wordGridWrapper {
+    padding: 1rem;
+  }
+
+  .wordGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, minmax(100px, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .wordGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, minmax(110px, 160px));
+    align-content: center;
+  }
 }

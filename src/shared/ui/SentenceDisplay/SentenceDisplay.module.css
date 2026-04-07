@@ -2,7 +2,7 @@
   min-height: 80px;
   padding: 1.25rem 1.5rem;
   border-radius: var(--radius-lg);
-  background-color: var(--color-surface-secondary);
+  background-color: var(--color-surface);
   border: 1.5px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -10,8 +10,8 @@
 }
 
 .sentence {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 700;
   color: var(--color-text-primary);
   text-align: center;
   line-height: 1.6;
@@ -21,4 +21,11 @@
   font-size: 1rem;
   color: var(--color-text-disabled);
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    min-height: 120px;
+    padding: 1.5rem 2rem;
+  }
 }

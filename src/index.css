@@ -37,6 +37,8 @@
 
 html {
   font-size: 16px;
+  /* 사용자 브라우저 폰트 설정 존중 */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -52,5 +54,6 @@ button {
 }
 
 #root {
-  min-height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
 }
