@@ -21,6 +21,7 @@ export function WordSelector() {
           <>
             {selectedWords.map((w) => (
               <span key={`${w.category}-${w.label}`} className={styles.selectedChip}>
+                {w.emoji && <span aria-hidden="true">{w.emoji}</span>}
                 {w.label}
               </span>
             ))}
@@ -66,6 +67,7 @@ export function WordSelector() {
                     toggleWord({
                       label: word.label,
                       category: activeCategory?.label ?? '',
+                      emoji: word.emoji,
                     })
                   }
                 />

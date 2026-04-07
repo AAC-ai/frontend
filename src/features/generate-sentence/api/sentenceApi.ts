@@ -4,8 +4,12 @@ import type { SentenceGenerateRequest, SentenceGenerateResponse } from '@/entiti
 export function generateSentence(
   request: SentenceGenerateRequest,
 ): Promise<SentenceGenerateResponse> {
+  // emoji 필드는 프론트 전용 — API에는 category/label만 전송
+  const body: SentenceGenerateRequest = {
+    words: request.words.map(({ category, label }) => ({ category, label })),
+  };
   return apiFetch<SentenceGenerateResponse>('/sentence/generate', {
     method: 'POST',
-    body: JSON.stringify(request),
+    body: JSON.stringify(body),
   });
 }
