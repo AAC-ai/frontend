@@ -4,7 +4,7 @@ import type { SentenceGenerateRequest, SentenceGenerateResponse } from '@/entiti
 export function generateSentence(
   request: SentenceGenerateRequest,
 ): Promise<SentenceGenerateResponse> {
-  return apiFetch<SentenceGenerateResponse>('/api/sentence/generate', {
+  return apiFetch<SentenceGenerateResponse>('/sentence/generate', {
     method: 'POST',
     body: JSON.stringify(request),
   });
