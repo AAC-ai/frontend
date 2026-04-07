@@ -67,7 +67,6 @@
     border-top: none;
     border-left: 1.5px solid var(--color-border);
     padding: 1.5rem;
-    justify-content: flex-end;
     gap: 1rem;
     background-color: var(--color-surface-secondary);
   }
