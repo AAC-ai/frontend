@@ -1,5 +1,6 @@
 .wrapper {
-  min-height: 48px;
+  flex: 1;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

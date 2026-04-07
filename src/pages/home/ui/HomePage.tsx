@@ -17,6 +17,15 @@ export function HomePage() {
     <main className={styles.page} aria-label="아코 AAC 홈">
       <header className={styles.header}>
         <span className={styles.logo}>아코 AAC</span>
+      </header>
+
+      <div className={styles.sentenceArea}>
+        <SentenceDisplay
+          sentence={data?.sentence}
+          isLoading={isPending}
+          isError={isError}
+          onRetry={() => { reset(); handleGenerate(); }}
+        />
         <div className={styles.actions}>
           <button
             type="button"
@@ -37,15 +46,6 @@ export function HomePage() {
             {isPending ? '생성 중…' : '✨ AI 문장'}
           </button>
         </div>
-      </header>
-
-      <div className={styles.sentenceArea}>
-        <SentenceDisplay
-          sentence={data?.sentence}
-          isLoading={isPending}
-          isError={isError}
-          onRetry={() => { reset(); handleGenerate(); }}
-        />
       </div>
 
       <div className={styles.wordArea}>
