@@ -19,12 +19,19 @@ export function WordSelector() {
           <span className={styles.selectedLabel}>단어를 선택해 주세요</span>
         ) : (
           <>
-            {selectedWords.map((w) => (
-              <span key={`${w.category}-${w.label}`} className={styles.selectedChip}>
-                {w.emoji && <span aria-hidden="true">{w.emoji}</span>}
-                {w.label}
-              </span>
-            ))}
+            {selectedWords.map((w) => {
+              const color = categories.find((c) => c.label === w.category)?.color;
+              return (
+                <span
+                  key={`${w.category}-${w.label}`}
+                  className={styles.selectedChip}
+                  style={color ? { borderColor: color, color, backgroundColor: `${color}18` } : undefined}
+                >
+                  {w.emoji && <span aria-hidden="true">{w.emoji}</span>}
+                  {w.label}
+                </span>
+              );
+            })}
             <button
               type="button"
               className={styles.clearButton}
