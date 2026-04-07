@@ -68,15 +68,15 @@
   }
 
   .vertical {
-    min-height: 68px;
+    min-height: 76px;
   }
 
   .vertical .emoji {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .vertical .label {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 }
 
