@@ -1,0 +1,29 @@
+.wrapper {
+  flex: 1;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sentence {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+.placeholder {
+  font-size: 0.9375rem;
+  color: var(--color-text-disabled);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    min-height: 56px;
+  }
+
+  .sentence {
+    font-size: 1.25rem;
+  }
+}

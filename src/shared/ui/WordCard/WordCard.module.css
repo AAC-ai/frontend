@@ -1,0 +1,65 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+.card:focus-visible {
+  outline: 4px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.card:hover:not(.selected) {
+  background-color: var(--color-surface-secondary);
+  border-color: var(--color-primary);
+}
+
+.card:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.selected {
+  background-color: #EFF6FF;
+  border-color: var(--color-primary);
+  border-width: 3px;
+}
+
+.emoji {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1;
+  user-select: none;
+}
+
+.label {
+  font-size: clamp(0.8125rem, 1.8vw, 1.0625rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+  word-break: keep-all;
+  line-height: 1.2;
+}
+
+.selected .label {
+  color: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  .card:active:not(:disabled) {
+    transform: none;
+  }
+}
