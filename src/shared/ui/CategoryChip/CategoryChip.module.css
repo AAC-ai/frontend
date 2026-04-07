@@ -17,6 +17,15 @@
   touch-action: manipulation;
 }
 
+.chip:focus-visible {
+  outline: 4px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.active {
+  font-weight: 700;
+}
+
 @media (min-width: 768px) {
   .chip {
     min-height: 52px;
@@ -24,23 +33,6 @@
     font-size: 1rem;
     border-width: 2px;
   }
-}
-
-.chip:focus-visible {
-  outline: 4px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.chip:hover:not(.active) {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-.active {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-primary-foreground);
-  font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -45,6 +45,7 @@ export function WordSelector() {
               key={category.id}
               label={category.label}
               emoji={category.emoji}
+              color={category.color}
               isActive={activeCategoryId === category.id}
               onClick={() => setActiveCategory(category.id)}
             />
