@@ -2,11 +2,11 @@
   display: grid;
   height: 100dvh;
   overflow: hidden;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "header"
-    "words"
-    "output";
+    "sentence"
+    "words";
   background-color: var(--color-surface-secondary);
 }
 
@@ -38,7 +38,6 @@
   gap: 0.5rem;
 }
 
-/* 초기화 버튼 - 원형 아웃라인 */
 .clearBtn {
   display: flex;
   align-items: center;
@@ -69,7 +68,6 @@
   outline-offset: 2px;
 }
 
-/* AI 문장 버튼 - 채워진 pill */
 .generateBtn {
   display: flex;
   align-items: center;
@@ -102,6 +100,15 @@
   outline-offset: 2px;
 }
 
+/* ─── 문장 표시 (헤더 바로 아래, 전체 너비) ─── */
+.sentenceArea {
+  grid-area: sentence;
+  background-color: var(--color-surface);
+  border-bottom: 1.5px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  flex-shrink: 0;
+}
+
 /* ─── 단어 영역 ─── */
 .wordArea {
   grid-area: words;
@@ -111,30 +118,11 @@
   min-height: 0;
 }
 
-/* ─── 문장 결과 ─── */
-.outputArea {
-  grid-area: output;
-  background-color: var(--color-surface);
-  border-top: 1.5px solid var(--color-border);
-  padding: 0.75rem 1rem;
-  flex-shrink: 0;
-}
-
-/* ─── 데스크탑 ≥ 768px ─── */
+/* ─── 데스크탑: 단일 컬럼 유지, 약간 여유 ─── */
 @media (min-width: 768px) {
-  .page {
-    grid-template-columns: 1fr 380px;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "header  output"
-      "words   output";
-  }
-
   .header {
     height: 64px;
-    padding: 0 1.25rem;
-    border-bottom: none;
-    border-right: 1.5px solid var(--color-border);
+    padding: 0 1.5rem;
   }
 
   .logo {
@@ -149,24 +137,11 @@
   .generateBtn {
     height: 44px;
     font-size: 1rem;
-    padding: 0 1.25rem;
+    padding: 0 1.375rem;
   }
 
-  .outputArea {
-    border-top: none;
-    border-left: 1.5px solid var(--color-border);
-    padding: 1.5rem;
-    background-color: var(--color-surface-secondary);
-  }
-
-  .wordArea {
-    border-right: 1.5px solid var(--color-border);
-  }
-}
-
-@media (min-width: 1280px) {
-  .page {
-    grid-template-columns: 1fr 440px;
+  .sentenceArea {
+    padding: 1rem 1.5rem;
   }
 }
 

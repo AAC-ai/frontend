@@ -1,7 +1,7 @@
 import { useSelectedWordsStore } from '@/features/select-word';
 import { useSentenceMutation } from '@/features/generate-sentence';
 import { WordSelector } from '@/widgets/word-selector';
-import { SentenceResult } from '@/widgets/sentence-result';
+import { SentenceDisplay } from '@/shared/ui';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
@@ -11,11 +11,6 @@ export function HomePage() {
   const handleGenerate = () => {
     if (selectedWords.length === 0) return;
     mutate({ words: selectedWords });
-  };
-
-  const handleRetry = () => {
-    reset();
-    handleGenerate();
   };
 
   return (
@@ -44,17 +39,17 @@ export function HomePage() {
         </div>
       </header>
 
-      <div className={styles.wordArea}>
-        <WordSelector />
-      </div>
-
-      <div className={styles.outputArea}>
-        <SentenceResult
+      <div className={styles.sentenceArea}>
+        <SentenceDisplay
           sentence={data?.sentence}
           isLoading={isPending}
           isError={isError}
-          onRetry={handleRetry}
+          onRetry={() => { reset(); handleGenerate(); }}
         />
+      </div>
+
+      <div className={styles.wordArea}>
+        <WordSelector />
       </div>
     </main>
   );
