@@ -1,4 +1,3 @@
-/* ─── 모바일: 세로 flex, 100dvh, 스크롤 없음 ─── */
 .page {
   display: grid;
   height: 100dvh;
@@ -11,23 +10,99 @@
   background-color: var(--color-surface-secondary);
 }
 
+/* ─── 헤더 ─── */
 .header {
   grid-area: header;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 56px;
   background-color: var(--color-surface);
   border-bottom: 1.5px solid var(--color-border);
   flex-shrink: 0;
+  gap: 0.75rem;
 }
 
-.title {
+.logo {
   font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 초기화 버튼 - 원형 아웃라인 */
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.clearBtn:hover:not(:disabled) {
+  border-color: var(--color-error);
+  background-color: #FEF2F2;
+}
+
+.clearBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.clearBtn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* AI 문장 버튼 - 채워진 pill */
+.generateBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 40px;
+  padding: 0 1.125rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+  font-family: inherit;
+}
+
+.generateBtn:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.generateBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.generateBtn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ─── 단어 영역 ─── */
 .wordArea {
   grid-area: words;
   overflow: hidden;
@@ -36,18 +111,16 @@
   min-height: 0;
 }
 
+/* ─── 문장 결과 ─── */
 .outputArea {
   grid-area: output;
   background-color: var(--color-surface);
-  border-top: 2px solid var(--color-border);
-  padding: 0.875rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  border-top: 1.5px solid var(--color-border);
+  padding: 0.75rem 1rem;
   flex-shrink: 0;
 }
 
-/* ─── 데스크탑 ≥ 768px: 2열 그리드 ─── */
+/* ─── 데스크탑 ≥ 768px ─── */
 @media (min-width: 768px) {
   .page {
     grid-template-columns: 1fr 380px;
@@ -58,16 +131,31 @@
   }
 
   .header {
+    height: 64px;
+    padding: 0 1.25rem;
     border-bottom: none;
     border-right: 1.5px solid var(--color-border);
-    padding: 1rem 1.25rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .clearBtn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .generateBtn {
+    height: 44px;
+    font-size: 1rem;
+    padding: 0 1.25rem;
   }
 
   .outputArea {
     border-top: none;
     border-left: 1.5px solid var(--color-border);
     padding: 1.5rem;
-    gap: 1rem;
     background-color: var(--color-surface-secondary);
   }
 
@@ -76,9 +164,15 @@
   }
 }
 
-/* ─── 넓은 데스크탑 ≥ 1280px: 우측 패널 더 넓게 ─── */
 @media (min-width: 1280px) {
   .page {
     grid-template-columns: 1fr 440px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clearBtn,
+  .generateBtn {
+    transition: none;
   }
 }

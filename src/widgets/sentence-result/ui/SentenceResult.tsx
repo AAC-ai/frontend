@@ -1,16 +1,16 @@
 import { useSelectedWordsStore } from '@/features/select-word';
-import { useSentenceMutation, GenerateButton } from '@/features/generate-sentence';
 import { SentenceDisplay } from '@/shared/ui';
 import styles from './SentenceResult.module.css';
 
-export function SentenceResult() {
-  const { selectedWords, clearWords } = useSelectedWordsStore();
-  const { mutate, isPending, isError, reset, data } = useSentenceMutation();
+interface SentenceResultProps {
+  sentence?: string;
+  isLoading: boolean;
+  isError: boolean;
+  onRetry: () => void;
+}
 
-  const handleGenerate = () => {
-    if (selectedWords.length === 0) return;
-    mutate({ words: selectedWords });
-  };
+export function SentenceResult({ sentence, isLoading, isError, onRetry }: SentenceResultProps) {
+  const { selectedWords, clearWords } = useSelectedWordsStore();
 
   return (
     <div className={styles.container}>
@@ -39,21 +39,13 @@ export function SentenceResult() {
         )}
       </div>
 
-      {/* 문장 결과 + 생성 버튼 */}
+      {/* 문장 결과 */}
       <div className={styles.resultSection}>
         <SentenceDisplay
-          sentence={data?.sentence}
-          isLoading={isPending}
+          sentence={sentence}
+          isLoading={isLoading}
           isError={isError}
-          onRetry={() => {
-            reset();
-            handleGenerate();
-          }}
-        />
-        <GenerateButton
-          onClick={handleGenerate}
-          isPending={isPending}
-          disabled={selectedWords.length === 0}
+          onRetry={onRetry}
         />
       </div>
     </div>
