@@ -61,19 +61,42 @@
 }
 
 /* ─── 카테고리 탭 ─── */
+.categoryBarWrapper {
+  position: relative;
+  flex-shrink: 0;
+  background-color: var(--color-surface);
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+/* 오른쪽 그라데이션 - 스크롤 유도 */
+.categoryBarWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 3.5rem;
+  background: linear-gradient(to right, transparent, var(--color-surface));
+  pointer-events: none;
+}
+
 .categoryBar {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
   padding: 0.75rem 1rem;
   scrollbar-width: none;
-  flex-shrink: 0;
-  background-color: var(--color-surface);
-  border-bottom: 1.5px solid var(--color-border);
 }
 
 .categoryBar::-webkit-scrollbar {
   display: none;
+}
+
+/* 데스크탑: 그라데이션 불필요 */
+@media (min-width: 768px) {
+  .categoryBarWrapper::after {
+    display: none;
+  }
 }
 
 /* ─── 단어 그리드 ─── */

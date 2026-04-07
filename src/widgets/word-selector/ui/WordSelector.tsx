@@ -38,17 +38,19 @@ export function WordSelector() {
       </div>
 
       {/* 카테고리 탭 */}
-      <nav aria-label="카테고리 선택" className={styles.categoryBar}>
-        {categories.map((category) => (
-          <CategoryChip
-            key={category.id}
-            label={category.label}
-            emoji={category.emoji}
-            isActive={activeCategoryId === category.id}
-            onClick={() => setActiveCategory(category.id)}
-          />
-        ))}
-      </nav>
+      <div className={styles.categoryBarWrapper}>
+        <nav aria-label="카테고리 선택" className={styles.categoryBar}>
+          {categories.map((category) => (
+            <CategoryChip
+              key={category.id}
+              label={category.label}
+              emoji={category.emoji}
+              isActive={activeCategoryId === category.id}
+              onClick={() => setActiveCategory(category.id)}
+            />
+          ))}
+        </nav>
+      </div>
 
       {/* 단어 그리드 */}
       <section aria-label={`${activeCategory?.label ?? ''} 단어 목록`}>
