@@ -6,6 +6,43 @@
   justify-content: flex-start;
 }
 
+.sentenceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speakButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-bg-secondary, #f0f0f0);
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.speakButton:hover {
+  background: var(--color-bg-tertiary, #e0e0e0);
+}
+
+.speakButton[aria-pressed='true'] {
+  background: var(--color-primary, #4a90e2);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speakButton {
+    transition: none;
+  }
+}
+
 .sentence {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 700;
