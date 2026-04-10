@@ -1,5 +1,8 @@
-import { apiFetch } from '@/shared/api/client';
-import type { SentenceGenerateRequest, SentenceGenerateResponse } from '@/entities/sentence';
+import { apiFetch } from "@/shared/api/client";
+import type {
+  SentenceGenerateRequest,
+  SentenceGenerateResponse,
+} from "@/entities/sentence";
 
 export function generateSentence(
   request: SentenceGenerateRequest,
@@ -8,8 +11,8 @@ export function generateSentence(
   const body: SentenceGenerateRequest = {
     words: request.words.map(({ category, label }) => ({ category, label })),
   };
-  return apiFetch<SentenceGenerateResponse>('/sentence/generate', {
-    method: 'POST',
+  return apiFetch<SentenceGenerateResponse>("/sentence", {
+    method: "POST",
     body: JSON.stringify(body),
   });
 }
