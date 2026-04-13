@@ -25,12 +25,20 @@
       "permissions": []
     },
     "plugins": [
-      "expo-router",
-      "react-native-webview"
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
     },
-    "scheme": "aac"
+    "scheme": "aac",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "380f7115-8f4d-4343-930a-7c66149365fe"
+      }
+    },
+    "owner": "eunwoo-levi"
   }
 }
