@@ -1,0 +1,11 @@
+{
+  "name": "aac-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter client dev",
+    "build": "pnpm --filter client build",
+    "app:start": "pnpm --filter aac-app start",
+    "app:ios": "pnpm --filter aac-app ios",
+    "app:android": "pnpm --filter aac-app android"
+  }
+}
