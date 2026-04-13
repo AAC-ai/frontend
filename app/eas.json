@@ -30,7 +30,8 @@
       },
       "android": {
         "buildType": "app-bundle",
-        "distribution": "store"
+        "distribution": "store",
+        "credentialSource": "remote"
       }
     }
   },
