@@ -1,0 +1,9 @@
+node_modules/
+pnpm-lock.yaml
+.expo/
+dist/
+*.orig.*
+web-build/
+android/
+ios/
+google-service-account.json
