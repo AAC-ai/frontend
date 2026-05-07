@@ -1,14 +1,39 @@
+import { getAccessToken } from '@/shared/model/authStore';
+import { HttpError } from './types';
+import type { ApiResponse } from './types';
+
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
-export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  });
+export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const token = getAccessToken();
 
-  if (!response.ok) {
-    throw new Error(`요청에 실패했어요 (${response.status})`);
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...(options.headers as Record<string, string>),
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
   }
 
-  return response.json() as Promise<T>;
+  const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+
+  if (!response.ok) {
+    let message = `요청에 실패했어요 (${response.status})`;
+    try {
+      const body = await response.json();
+      if (body?.message) message = body.message;
+    } catch {
+      // 응답 body 파싱 실패 시 기본 메시지 사용
+    }
+    throw new HttpError(response.status, message);
+  }
+
+  // 204 No Content
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  const json = (await response.json()) as ApiResponse<T>;
+  return json.data;
 }
