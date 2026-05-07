@@ -21,6 +21,18 @@ export async function refreshAccessToken(): Promise<{ accessToken: string }> {
   return res.json() as Promise<{ accessToken: string }>;
 }
 
+export async function reissueToken(
+  refreshToken: string,
+): Promise<{ accessToken: string; refreshToken: string }> {
+  const res = await authFetch('/auth/reissue', {
+    method: 'POST',
+    body: JSON.stringify({ refreshToken }),
+  });
+  if (!res.ok) throw new Error('토큰 재발급에 실패했어요');
+  const json = await res.json() as { status: number; message: string; data: { accessToken: string; refreshToken: string } };
+  return json.data;
+}
+
 export async function logout(): Promise<void> {
   const res = await authFetch('/auth/logout', { method: 'POST' });
   if (!res.ok && res.status !== 204) throw new Error('로그아웃에 실패했어요');
