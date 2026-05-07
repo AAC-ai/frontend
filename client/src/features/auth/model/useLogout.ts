@@ -1,12 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
-import { useAuthStore } from '@/shared/model';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logout } from '../api/authApi';
 
 export function useLogout() {
-  const clearAccessToken = useAuthStore((s) => s.clearAccessToken);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: logout,
-    onSuccess: () => clearAccessToken(),
+    onSuccess: () => queryClient.removeQueries({ queryKey: ['user'] }),
   });
 }

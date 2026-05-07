@@ -1,22 +1,19 @@
-import { getAccessToken } from '@/shared/model/authStore';
 import { HttpError } from './types';
 import type { ApiResponse } from './types';
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = getAccessToken();
-
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string>),
   };
 
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-
-  const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...options,
+    headers,
+    credentials: 'include',
+  });
 
   if (!response.ok) {
     let message = `요청에 실패했어요 (${response.status})`;
