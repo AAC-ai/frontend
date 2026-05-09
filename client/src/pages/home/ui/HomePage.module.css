@@ -32,6 +32,19 @@
   flex-shrink: 0;
 }
 
+.authArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.userName {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
 .actions {
   display: flex;
   align-items: center;

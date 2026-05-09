@@ -1,5 +1,7 @@
 import { useSelectedWordsStore } from '@/features/select-word';
 import { useSentenceMutation } from '@/features/generate-sentence';
+import { GoogleLoginButton, LogoutButton } from '@/features/auth';
+import { useCurrentUser } from '@/entities/user';
 import { WordSelector } from '@/widgets/word-selector';
 import { SentenceDisplay } from '@/shared/ui';
 import styles from './HomePage.module.css';
@@ -7,6 +9,7 @@ import styles from './HomePage.module.css';
 export function HomePage() {
   const { selectedWords, clearWords } = useSelectedWordsStore();
   const { mutate, isPending, isError, reset, data } = useSentenceMutation();
+  const { data: user } = useCurrentUser();
 
   const handleGenerate = () => {
     if (selectedWords.length === 0) return;
@@ -17,6 +20,16 @@ export function HomePage() {
     <main className={styles.page} aria-label="아코 AAC 홈">
       <header className={styles.header}>
         <span className={styles.logo}>아코 AAC</span>
+        <div className={styles.authArea}>
+          {user ? (
+            <>
+              <span className={styles.userName}>{user.name}</span>
+              <LogoutButton />
+            </>
+          ) : (
+            <GoogleLoginButton />
+          )}
+        </div>
       </header>
 
       <div className={styles.sentenceArea}>
