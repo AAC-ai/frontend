@@ -3,7 +3,15 @@ import type { ApiResponse } from './types';
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
-export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
+async function refreshToken(): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/auth/refresh`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+  if (!res.ok) throw new HttpError(401, '인증이 필요합니다.');
+}
+
+export async function apiFetch<T>(path: string, options: RequestInit = {}, _retry = false): Promise<T> {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string>),
@@ -14,6 +22,11 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
     headers,
     credentials: 'include',
   });
+
+  if (response.status === 401 && !_retry) {
+    await refreshToken();
+    return apiFetch<T>(path, options, true);
+  }
 
   if (!response.ok) {
     let message = `요청에 실패했어요 (${response.status})`;
