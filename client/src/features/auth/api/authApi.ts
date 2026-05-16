@@ -13,16 +13,6 @@ export async function exchangeGoogleCode(code: string): Promise<void> {
   if (!res.ok) throw new Error('Google 인증에 실패했어요');
 }
 
-export async function refreshAccessToken(): Promise<void> {
-  const res = await authFetch('/auth/refresh', { method: 'POST' });
-  if (!res.ok) throw new Error('토큰 재발급에 실패했어요');
-}
-
-export async function reissueToken(): Promise<void> {
-  const res = await authFetch('/auth/reissue', { method: 'POST' });
-  if (!res.ok) throw new Error('토큰 재발급에 실패했어요');
-}
-
 export async function logout(): Promise<void> {
   const res = await authFetch('/auth/logout', { method: 'POST' });
   if (!res.ok && res.status !== 204) throw new Error('로그아웃에 실패했어요');
