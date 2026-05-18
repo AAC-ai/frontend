@@ -10,7 +10,7 @@ interface SentenceResultProps {
 }
 
 export function SentenceResult({ sentence, isLoading, isError, onRetry }: SentenceResultProps) {
-  const { selectedWords, clearWords } = useSelectedWordsStore();
+  const { selectedWords } = useSelectedWordsStore();
 
   return (
     <div className={styles.container}>
@@ -27,14 +27,6 @@ export function SentenceResult({ sentence, isLoading, isError, onRetry }: Senten
                 {w.label}
               </span>
             ))}
-            <button
-              type="button"
-              className={styles.clearButton}
-              onClick={clearWords}
-              aria-label="선택 초기화"
-            >
-              초기화
-            </button>
           </div>
         )}
       </div>

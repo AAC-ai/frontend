@@ -5,7 +5,7 @@ import { CategoryChip, WordCard } from '@/shared/ui';
 import styles from './WordSelector.module.css';
 
 export function WordSelector() {
-  const { selectedWords, activeCategoryId, toggleWord, setActiveCategory, clearWords } =
+  const { selectedWords, activeCategoryId, toggleWord, setActiveCategory } =
     useSelectedWordsStore();
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
@@ -32,14 +32,6 @@ export function WordSelector() {
                 </span>
               );
             })}
-            <button
-              type="button"
-              className={styles.clearButton}
-              onClick={clearWords}
-              aria-label="선택 초기화"
-            >
-              초기화
-            </button>
           </>
         )}
       </div>
