@@ -42,6 +42,13 @@
   user-select: none;
 }
 
+.image {
+  width: clamp(2.5rem, 5vw, 4rem);
+  height: clamp(2.5rem, 5vw, 4rem);
+  object-fit: contain;
+  user-select: none;
+}
+
 .label {
   font-size: clamp(0.8125rem, 1.8vw, 1.0625rem);
   font-weight: 600;
