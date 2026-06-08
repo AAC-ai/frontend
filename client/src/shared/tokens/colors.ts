@@ -1,6 +1,6 @@
 export const colors = {
-  '--color-primary': '#2563EB',
-  '--color-primary-hover': '#1D4ED8',
+  '--color-primary': '#4CBBA0',
+  '--color-primary-hover': '#3AA88D',
   '--color-primary-foreground': '#FFFFFF',
 
   '--color-surface': '#FFFFFF',
