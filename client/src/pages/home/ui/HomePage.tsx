@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { categories } from '@/entities/category';
 import { useSelectedWordsStore } from '@/features/select-word';
 import { useSentenceMutation } from '@/features/generate-sentence';
-import { GoogleLoginButton, LogoutButton } from '@/features/auth';
+import { GoogleLoginButton, UserProfile } from '@/features/auth';
 import { useTts } from '@/features/speak-sentence';
 import { useCurrentUser } from '@/entities/user';
 import { WordSelector } from '@/widgets/word-selector';
@@ -41,10 +41,7 @@ export function HomePage() {
 
         <div className={styles.authArea}>
           {user ? (
-            <>
-              <span className={styles.userName}>{user.name}</span>
-              <LogoutButton />
-            </>
+            <UserProfile user={user} />
           ) : (
             <GoogleLoginButton />
           )}
