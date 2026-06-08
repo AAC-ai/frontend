@@ -54,8 +54,15 @@
   white-space: nowrap;
 }
 
-.categoryNav {
+.categorySection {
   flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.categoryNav {
+  height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -67,6 +74,29 @@
 
 .categoryNav::-webkit-scrollbar {
   display: none;
+}
+
+.scrollDownBtn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, #A8D4F8 60%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  filter: drop-shadow(0 -2px 4px #A8D4F8);
+}
+
+.scrollDownBtn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: -3px;
 }
 
 /* ─── 메인 콘텐츠 ─── */
@@ -217,7 +247,7 @@
   }
 
   .categoryNav {
-    padding: 0.75rem 0.75rem;
+    padding: 0.75rem 0.75rem 0.75rem;
     gap: 0.5rem;
   }
 

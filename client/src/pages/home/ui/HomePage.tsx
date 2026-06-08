@@ -1,7 +1,9 @@
+import { useRef, useEffect, useState } from 'react';
 import { categories } from '@/entities/category';
 import { useSelectedWordsStore } from '@/features/select-word';
 import { useSentenceMutation } from '@/features/generate-sentence';
 import { GoogleLoginButton, LogoutButton } from '@/features/auth';
+import { useTts } from '@/features/speak-sentence';
 import { useCurrentUser } from '@/entities/user';
 import { WordSelector } from '@/widgets/word-selector';
 import { CategoryChip, SentenceDisplay } from '@/shared/ui';
@@ -9,7 +11,21 @@ import styles from './HomePage.module.css';
 
 export function HomePage() {
   const { selectedWords, clearWords, activeCategoryId, setActiveCategory } = useSelectedWordsStore();
+  const categoryNavRef = useRef<HTMLElement>(null);
+  const [canScrollDown, setCanScrollDown] = useState(false);
+
+  useEffect(() => {
+    const el = categoryNavRef.current;
+    if (!el) return;
+    const check = () => setCanScrollDown(el.scrollHeight > el.scrollTop + el.clientHeight + 1);
+    check();
+    el.addEventListener('scroll', check);
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => { el.removeEventListener('scroll', check); ro.disconnect(); };
+  }, []);
   const { mutate, isPending, isError, reset, data } = useSentenceMutation();
+  const { speak, isSpeaking } = useTts();
   const { data: user } = useCurrentUser();
 
   const handleGenerate = () => {
@@ -34,20 +50,32 @@ export function HomePage() {
           )}
         </div>
 
-        <nav aria-label="카테고리 선택" className={styles.categoryNav}>
-          {categories.map((category) => (
-            <CategoryChip
-              key={category.id}
-              label={category.label}
-              emoji={category.emoji}
-              image={category.image}
-              color={category.color}
-              layout="vertical"
-              isActive={activeCategoryId === category.id}
-              onClick={() => setActiveCategory(category.id)}
-            />
-          ))}
-        </nav>
+        <div className={styles.categorySection}>
+          <nav ref={categoryNavRef} aria-label="카테고리 선택" className={styles.categoryNav}>
+            {categories.map((category) => (
+              <CategoryChip
+                key={category.id}
+                label={category.label}
+                emoji={category.emoji}
+                image={category.image}
+                color={category.color}
+                layout="vertical"
+                isActive={activeCategoryId === category.id}
+                onClick={() => setActiveCategory(category.id)}
+              />
+            ))}
+          </nav>
+          {canScrollDown && (
+            <button
+              type="button"
+              className={styles.scrollDownBtn}
+              onClick={() => categoryNavRef.current?.scrollBy({ top: 200, behavior: 'smooth' })}
+              aria-label="카테고리 더 보기"
+            >
+              ▼
+            </button>
+          )}
+        </div>
       </aside>
 
       {/* ─── 우측 메인 콘텐츠 ─── */}
@@ -107,6 +135,8 @@ export function HomePage() {
             isLoading={isPending}
             isError={isError}
             onRetry={() => { reset(); handleGenerate(); }}
+            onSpeak={data?.sentence ? () => speak(data.sentence) : undefined}
+            isSpeaking={isSpeaking}
           />
         </div>
       </div>
