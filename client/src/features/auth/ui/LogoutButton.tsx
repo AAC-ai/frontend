@@ -1,4 +1,5 @@
 import { useLogout } from '../model/useLogout';
+import styles from './LogoutButton.module.css';
 
 export function LogoutButton() {
   const { mutate, isPending } = useLogout();
@@ -6,6 +7,7 @@ export function LogoutButton() {
   return (
     <button
       type="button"
+      className={styles.btn}
       onClick={() => mutate()}
       disabled={isPending}
       aria-busy={isPending}
