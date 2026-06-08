@@ -1,4 +1,5 @@
 import { useSelectedWordsStore } from '@/features/select-word';
+import { useTts } from '@/features/speak-sentence';
 import { SentenceDisplay } from '@/shared/ui';
 import styles from './SentenceResult.module.css';
 
@@ -11,6 +12,7 @@ interface SentenceResultProps {
 
 export function SentenceResult({ sentence, isLoading, isError, onRetry }: SentenceResultProps) {
   const { selectedWords } = useSelectedWordsStore();
+  const { speak, isSpeaking } = useTts();
 
   return (
     <div className={styles.container}>
@@ -38,6 +40,8 @@ export function SentenceResult({ sentence, isLoading, isError, onRetry }: Senten
           isLoading={isLoading}
           isError={isError}
           onRetry={onRetry}
+          onSpeak={sentence ? () => speak(sentence) : undefined}
+          isSpeaking={isSpeaking}
         />
       </div>
     </div>
