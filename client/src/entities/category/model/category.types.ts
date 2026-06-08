@@ -3,4 +3,5 @@ export interface Category {
   label: string;
   emoji: string;
   color: string;
+  image?: string;
 }
