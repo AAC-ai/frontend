@@ -3,30 +3,126 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding: 0.625rem;
 }
 
-.wordGrid {
+/* ─── 수평 스크롤 페이징 컨테이너 ─── */
+.scrollContainer {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  min-height: 0;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── 페이지 (단어 그리드) ─── */
+.page {
+  flex-shrink: 0;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, minmax(80px, 110px));
   gap: 0.5rem;
+  padding: 0.625rem;
+  scroll-snap-align: start;
+  align-content: start;
 }
 
+/* ─── 페이지네이션 (화살표 + 도트) ─── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 6px 0 8px;
+  flex-shrink: 0;
+}
+
+.arrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 1.375rem;
+  line-height: 1;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.arrowBtn:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.arrowBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.arrowBtn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-border);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  min-width: 0;
+}
+
+.dotActive {
+  background-color: var(--color-primary);
+  transform: scale(1.4);
+}
+
+.dot:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ─── 태블릿/데스크탑 ─── */
 @media (min-width: 768px) {
-  .wrapper {
+  .page {
+    grid-template-columns: repeat(4, 1fr);
     padding: 1rem;
   }
 
-  .wordGrid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, minmax(100px, 1fr));
+  .dots {
+    gap: 10px;
+    padding: 8px 0 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
   }
 }
 
-@media (min-width: 1280px) {
-  .wordGrid {
-    grid-template-rows: repeat(2, minmax(110px, 160px));
-    align-content: center;
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
   }
 }
