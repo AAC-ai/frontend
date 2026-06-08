@@ -26,10 +26,11 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 0.5rem;
   padding: 0.625rem;
   scroll-snap-align: start;
-  align-content: center;
+  align-content: start;
 }
 
 /* ─── 페이지네이션 (화살표 + 도트) ─── */
@@ -103,25 +104,11 @@
   outline-offset: 3px;
 }
 
-/* 모바일(3열): 4번째 아이템부터 2행 → start */
-.page:has(> :nth-child(4)) {
-  align-content: start;
-}
-
 /* ─── 태블릿/데스크탑 ─── */
 @media (min-width: 768px) {
   .page {
     grid-template-columns: repeat(4, 1fr);
     padding: 1rem;
-  }
-
-  /* 데스크탑(4열): 4개까지는 1행 → center 복원, 5번째부터 start */
-  .page:has(> :nth-child(4)) {
-    align-content: center;
-  }
-
-  .page:has(> :nth-child(5)) {
-    align-content: start;
   }
 
   .dots {
