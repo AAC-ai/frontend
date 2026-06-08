@@ -42,7 +42,7 @@ export function GoogleLoginButton() {
       <span className={styles.logo}>
         <GoogleLogo />
       </span>
-      로그인
+      <span className={styles.label}>로그인</span>
     </a>
   );
 }
