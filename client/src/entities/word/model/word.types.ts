@@ -3,4 +3,5 @@ export interface Word {
   label: string;
   categoryId: string;
   emoji?: string;
+  image?: string;
 }

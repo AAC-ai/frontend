@@ -1,6 +1,6 @@
 :root {
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
+  --color-primary: #4CBBA0;
+  --color-primary-hover: #3AA88D;
   --color-primary-foreground: #FFFFFF;
 
   --color-surface: #FFFFFF;
@@ -23,7 +23,7 @@
 }
 
 [data-theme="high-contrast"] {
-  --color-primary: #1D4ED8;
+  --color-primary: #2E9A82;
   --color-text-primary: #000000;
   --color-text-secondary: #1E293B;
   --color-border: #94A3B8;

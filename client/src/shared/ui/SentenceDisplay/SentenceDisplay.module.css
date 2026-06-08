@@ -3,7 +3,7 @@
   min-height: 44px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .sentenceRow {
@@ -33,7 +33,7 @@
 }
 
 .speakButton[aria-pressed='true'] {
-  background: var(--color-primary, #4a90e2);
+  background: var(--color-primary, #4CBBA0);
   color: #fff;
 }
 
@@ -48,11 +48,13 @@
   font-weight: 700;
   color: var(--color-text-primary);
   line-height: 1.5;
+  text-align: center;
 }
 
 .placeholder {
   font-size: 0.9375rem;
   color: var(--color-text-disabled);
+  text-align: center;
 }
 
 @media (min-width: 768px) {
