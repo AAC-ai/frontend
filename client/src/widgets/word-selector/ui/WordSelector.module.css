@@ -29,7 +29,7 @@
   gap: 0.5rem;
   padding: 0.625rem;
   scroll-snap-align: start;
-  align-content: start;
+  align-content: center;
 }
 
 /* ─── 페이지네이션 (화살표 + 도트) ─── */
