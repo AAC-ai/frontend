@@ -63,6 +63,7 @@
     },
     "scheme": "aac",
     "extra": {
+      "appUrl": "https://aaco.kr/",
       "router": {
         "origin": false
       },

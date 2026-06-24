@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import { useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -9,8 +10,9 @@ import {
 } from "react-native";
 import { WebView } from "react-native-webview";
 
-// 배포된 웹 앱 URL로 교체
-const APP_URL = "https://aac.vercel.app";
+const APP_URL =
+  (Constants.expoConfig?.extra?.appUrl as string | undefined) ??
+  "https://aaco.kr/";
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null);
@@ -56,11 +58,13 @@ export default function HomeScreen() {
           setHasError(true);
         }}
         onHttpError={(e) => {
-          if (e.nativeEvent.statusCode >= 500) {
+          const code = e.nativeEvent.statusCode;
+          if (code >= 400) {
             setIsLoading(false);
             setHasError(true);
           }
         }}
+        javaScriptEnabled
         // TTS 음성 출력을 위해 미디어 자동재생 허용
         mediaPlaybackRequiresUserAction={false}
         allowsInlineMediaPlayback
